@@ -209,23 +209,23 @@
         <label for="nomeBusca" class="col-form-label">Informe o Nome do Procedimento</label>
         <input type="text" class="form-control" id="nomeBusca" placeholder="Digite o nome do procedimento">
     </div>
-    <button type="button" class="btn btn-success" id="btFindUser";">Buscar</button>
+    <button type="button" class="btn btn-success" id="btFindProcedimento";">Buscar</button>
 </form>
     <table class=" mt-4 table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>CPF</th>
-                <th>Email</th>
-                <th>Nascimento</th>
-                <th>Celular</th>            
+                <th>Sigla</th>
+                <th>Valor Avulso</th>
+                <th>Valor Convenio</th>
+                <th>Preparo</th>            
                 <th scope="col">Editar</th>
                 <th scope="col">Remover</th>
             </tr>
         </thead>
 
-        <tbody id="">
+        <tbody id="resultadoBusca">
             <!-- lListar Procedimentos-->
         </tbody>
     </table>
@@ -365,6 +365,64 @@ console.log(":)")
         $("#formProcedimento")[0].reset();
         $("#id").val('');
     }
+});
+
+// Buscar Procedimentos 
+$("#btFindProcedimento").on('click', function() {
+    const nomeBusca = $("#nomeBusca").val();
+
+    if (nomeBusca.trim() === "") {
+        Swal.fire('Atenção', 'Informe um nome para buscar.', 'warning');
+        return;
+    }
+
+    $.ajax({
+        url: 'api/buscarProcedimento.php',
+        type: 'GET',
+        data: { nome: nomeBusca },
+        dataType: 'json',
+        success: function(data) {
+            const $resultado = $("#resultadoBusca");
+            $resultado.empty();
+
+            if (Array.isArray(data) && data.length > 0) {
+                data.forEach(procedimento => {
+                    $resultado.append(`
+                        <tr>
+                            <td>${procedimento.id}</td>
+                            <td>${procedimento.nome_procedimento}</td>
+                            <td>${procedimento.sigla}</td>
+                            <td>${procedimento.valor_avulso || '-'}</td>
+                            <td>${procedimento.valor_convenio || '-'}</td>
+                            <td>${procedimento.preparo || '-'}</td>
+                            <td>
+                                <button class="btn btn-success btnEditar"
+                                    data-id="${procedimento.id}"
+                                    data-nome="${procedimento.nome_procedimento}"
+                                    data-sigla="${procedimento.sigla}"
+                                    data-valor_avulso="${procedimento.valor_avulso}"
+                                    data-valor_convenio="${procedimento.valor_convenio}"
+                                    data-preparo="${procedimento.preparo}">
+                                    Editar
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btnRemover"
+                                    data-id="${procedimento.id}">
+                                    Remover
+                                </button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            } else {
+                $resultado.append('<tr><td colspan="8" class="text-center">Nenhum procedimento encontrado</td></tr>');
+            }
+        },
+        error: function() {
+            Swal.fire('Erro', 'Erro ao buscar procedimento.', 'error');
+        }
+    });
 });
 
 
