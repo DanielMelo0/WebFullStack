@@ -171,8 +171,8 @@
             </tr>
         </thead>
 
-        <tbody id="">
-            <!-- lListar Usuarios-->
+        <tbody id="tabelaUsuarios">
+            <!-- Listar Usuarios-->
         </tbody>
     </table>
 </div>
@@ -272,7 +272,7 @@ $(document).ready(function() {
     // ✅ Função para listar usuários
     function listarUsuarios() {
         $.ajax({
-            url: 'api/listarUsuarios.php',
+            url: 'api/listarProfissionais.php',
             type: 'GET',
             dataType: 'json',
             success: function(data) {
@@ -284,11 +284,11 @@ $(document).ready(function() {
                         $tabela.append(`
                             <tr>
                                 <td>${usuario.id}</td>
-                                <td>${usuario.nome_cliente}</td>
-                                <td>${usuario.cpf}</td>
-                                <td>${usuario.email}</td>
-                                <td>${usuario.data_nasc}</td>
-                                <td>${usuario.numero_celular}</td>
+                                <td>${usuario.nome}</td>
+                                <td>${usuario.documento}</td>
+                                <td>${usuario.titulo}</td>
+                                <td>${usuario.assinatura}</td>
+                                
                             </tr>
                         `);
                     });
