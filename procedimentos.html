@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sistema de Gerenciamento Médico</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+      crossorigin="anonymous"
+    />
+  </head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><span style="color:aqua; font-weight: bold;">NautaSoft</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="./cliente.html">Paciente <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Procedimentos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./profissionais.html">Profissionais</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">Laudos</a>
+      </li>
+
+  
+    </ul>
+  
+  </div>
+</nav>
+
+    <!-- Main Container Init-->
+    <div class="container">
+      <h1 class="m-4 text-center items-center text-primary">Sistema de Gerenciamento Médico</h1>
+      <h2 class="text-center text-primary">Procedimentos</h2>
+
+        <!-- Save User Init -->
+        <form id="formProcedimento">            
+              
+    
+    <!-- ID Cliente -->
+    <div class="mb-3">
+      <label for="id_procedimento" class="form-label">ID Procedimento</label>
+      <input type="number" class="form-control" id="id_procedimento" readonly placeholder="ID automático" />
+    </div>
+
+    <!-- Nome do Procedimento -->
+    <div class="mb-3">
+      <label for="nome_procedimento" class="form-label">Nome do Procedimento</label>
+      <input
+        type="text"
+        class="form-control"
+        id="nome_procedimento"
+        required
+        placeholder="Informe o nome do Procedimento"
+      />
+    </div>
+
+    <!-- Sigla -->
+    <div class="mb-3">
+      <label for="Sigla" class="form-label">Sigla</label>
+      <input
+        type="text"
+        class="form-control"
+        id="sigla"
+        required
+        placeholder="Informe a Sigla do Procedimento"
+      />
+    </div>
+    
+    <!-- Valor Avulso -->
+     <div class="mb-3">
+      <label for="" class="form-label">Valor Avulso</label>
+      <input
+        type="number"
+        class="form-control"
+        id="valor_avulso"
+        required
+        placeholder="Valor Procedimento Avulso"
+      />
+     </div>
+
+          <div class="mb-3">
+      <label for="" class="form-label">Valor Convenio</label>
+      <input
+        type="number"
+        class="form-control"
+        id="valor_convenio"
+        required
+        placeholder="Valor Procedimento Avulso"
+      />
+     </div>
+
+
+    <!-- Valor Avulso -->
+     <div class="mb-3">
+      <label for="" class="form-label">Preparo</label>
+      <input
+        type="text"
+        class="form-control"
+        id="preparo"
+        required
+        placeholder="Preparo Procedimento "
+      />
+     </div>
+
+
+    <!-- Valor Convenio -->
+     <div class="mb-3">
+      <label for="" class="form-label">Valor Convenio</label>
+      <input
+        type="number"
+        class="form-control"
+        id="convenio"
+        required
+        placeholder="Valor Procedimento Convenio"
+      />
+     </div>
+
+
+    <!-- Botões -->
+ 
+      <!-- Botão Salvar -->
+      <button
+        type="submit"
+        id="btnTeste"
+    
+        class="btn btn-primary"
+      >
+        Salvar
+      </button>
+
+      <!-- Botão Novo -->
+      <button 
+        type="button" 
+        onClick="novoPaciente()" 
+        class="btn btn-danger"
+      >
+        Novo
+      </button>
+
+      <!-- Botão Buscar -->
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#modalPesquisarLaudos"
+      >
+        Buscar
+      </button>
+
+      <!-- Botão Listar -->
+      <button
+        id="listarPacientes"
+        type="button"
+        class="btn btn-info"
+      >
+        Listar Procedimentos
+      </button>
+
+
+</form>
+
+</form>
+      <div class="container mt-5">
+    <h2 class="mb-4">Lista de Procedimentos</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th>Valor Avuls.</th>
+                <th>Valor Conv.</th>
+                <th>Preparo</th>
+            </tr>
+        </thead>
+
+        <tbody id="tabelaProcedimentos">
+            <!-- lListar Usuarios-->
+        </tbody>
+    </table>
+</div>
+
+    <div class="modal fade" id="modalPesquisarLaudos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="center modal-title fs-5" id="exampleModalLabel">Busca de Procedimentos</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="formBuscar">
+    <div class="mb-3">
+        <label for="nomeBusca" class="col-form-label">Informe o Nome do Procedimento</label>
+        <input type="text" class="form-control" id="nomeBusca" placeholder="Digite o nome do procedimento">
+    </div>
+    <button type="button" class="btn btn-success" id="btFindUser";">Buscar</button>
+</form>
+    <table class=" mt-4 table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Nascimento</th>
+                <th>Celular</th>            
+                <th scope="col">Editar</th>
+                <th scope="col">Remover</th>
+            </tr>
+        </thead>
+
+        <tbody id="">
+            <!-- lListar Procedimentos-->
+        </tbody>
+    </table>
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div> <!-- Main Container -->
+    <!-- JQuery Script -->
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Bootstrap Script -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Main Script -->
+   
+    <!-- SweetAlert Script-->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <!-- Jquer Ajax-->
+<script>
+$(document).ready(function() {
+
+console.log(":)")
+    listarProcedimentos();
+
+    // Salvar (Inserir ou Editar)
+    $("#formProcedimento").on('submit', function(e) {
+        e.preventDefault();
+
+        const dados = {
+            id: $("#id").val(),
+            nome_procedimento: $("#nome_procedimento").val(),
+            valor: $("#valor").val(),
+            descricao: $("#descricao").val()
+        };
+
+        $.ajax({
+            url: 'api/inserirOuEditarProcedimento.php',
+            type: 'POST',
+            data: dados,
+            dataType: 'json',
+            success: function(response) {
+                if (response.status === 'success') {
+                    Swal.fire('Sucesso!', response.message, 'success');
+                    listarProcedimentos();
+                    novo();
+                } else {
+                    Swal.fire('Erro!', response.message, 'error');
+                }
+            }
+        });
+    });
+
+    // Função Listar
+    function listarProcedimentos() {
+        $.ajax({
+            url: 'api/listarProcedimentos.php',
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                const tabela = $("#tabelaProcedimentos");
+                tabela.empty();
+
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(proc => {
+                        tabela.append(`
+                            <tr>
+                                <td>${proc.id}</td>
+                                <td>${proc.nome_procedimento}</td>
+                                <td>${proc.sigla}</td>
+                                <td>R$ ${parseFloat(proc.valor_avulso).toFixed(2)}</td>
+                                <td>R$ ${parseFloat(proc.valor_convenio).toFixed(2)}</td>
+                                <td>${proc.preparo}</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    tabela.append('<tr><td colspan="5" class="text-center">Nenhum procedimento encontrado.</td></tr>');
+                }
+            }
+        });
+    }
+
+    // Editar
+    window.editar = function(id, nome, valor, descricao) {
+        $("#id").val(id);
+        $("#nome_procedimento").val(nome);
+        $("#valor").val(valor);
+        $("#descricao").val(descricao);
+    }
+
+    // Deletar
+    window.deletar = function(id) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Essa ação não pode ser desfeita!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, deletar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'api/deletarProcedimento.php',
+                    type: 'GET',
+                    data: { id: id },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            Swal.fire('Deletado!', response.message, 'success');
+                            listarProcedimentos();
+                        } else {
+                            Swal.fire('Erro!', response.message, 'error');
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    // Novo
+    window.novo = function() {
+        $("#formProcedimento")[0].reset();
+        $("#id").val('');
+    }
+});
+
+
+
+</script>
+
+
+  </body>
+</html>
