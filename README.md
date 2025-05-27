@@ -1,6 +1,6 @@
 # Responsive FullStack Website Project
 
-### Responsive Temple Website
+### Responsive Website PHP FullStack 
 
 - Responsive PHP Website Design Using Bootstrap, HTML CSS And JavaScript
 - Contains animated images with the Gsap and Sweet Alert Js library.
